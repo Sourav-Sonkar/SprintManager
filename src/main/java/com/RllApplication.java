@@ -1,13 +1,13 @@
-package com.example.demo;
+package com;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringManagerApplication {
+public class RllApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringManagerApplication.class, args);
+		SpringApplication.run(RllApplication.class, args);
 	}
 
 }
