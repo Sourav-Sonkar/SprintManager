@@ -11,6 +11,7 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Integer taskid;
+	String tasktitle;
 	String taskdesc;
 	String taskstatus;
 	String taskdate;
@@ -20,14 +21,18 @@ public class Task {
 		
 	}
 
-	public Task(Integer taskid, String taskdesc, String taskstatus, String taskdate, Integer empid) {
+
+	public Task(Integer taskid, String tasktitle, String taskdesc, String taskstatus, String taskdate, Integer empid) {
 		
 		this.taskid = taskid;
+		this.tasktitle = tasktitle;
 		this.taskdesc = taskdesc;
 		this.taskstatus = taskstatus;
 		this.taskdate = taskdate;
 		this.empid = empid;
 	}
+
+
 
 	public Integer getTaskid() {
 		return taskid;
@@ -69,11 +74,25 @@ public class Task {
 		this.empid = empid;
 	}
 
+
+	public String getTasktitle() {
+		return tasktitle;
+	}
+
+
+	public void setTasktitle(String tasktitle) {
+		this.tasktitle = tasktitle;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Task [taskid=" + taskid + ", taskdesc=" + taskdesc + ", taskstatus=" + taskstatus + ", taskdate="
-				+ taskdate + ", empid=" + empid + "]";
+		return "Task [taskid=" + taskid + ", tasktitle=" + tasktitle + ", taskdesc=" + taskdesc + ", taskstatus="
+				+ taskstatus + ", taskdate=" + taskdate + ", empid=" + empid + "]";
 	}
+
+
+	
 	
 	
 	
