@@ -17,7 +17,7 @@ public class Employee {
 	Integer empage;
 	String empemail;
 	String emppassword;
-	Integer empcontact;
+	String empcontact;
 	String emptype;
 	Integer teamid;
 	Integer mangid;
@@ -27,7 +27,7 @@ public class Employee {
 	}
 
 	public Employee(Integer empid, String empname, String empaddress, Integer empage, String empemail,
-			String emppassword, Integer empcontact, String emptype, Integer teamid, Integer mangid) {
+			String emppassword, String empcontact, String emptype, Integer teamid, Integer mangid) {
 		
 		this.empid = empid;
 		this.empname = empname;
@@ -89,11 +89,11 @@ public class Employee {
 		this.emppassword = emppassword;
 	}
 
-	public Integer getEmpcontact() {
+	public String getEmpcontact() {
 		return empcontact;
 	}
 
-	public void setEmpcontact(Integer empcontact) {
+	public void setEmpcontact(String empcontact) {
 		this.empcontact = empcontact;
 	}
 
