@@ -12,18 +12,16 @@ public class Manager {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Integer mangid;
 	Integer empid;
-	Integer taskid;
 	
 	
 	public Manager() {
 	}
 
 
-	public Manager(Integer mangid, Integer empid, Integer taskid) {
+	public Manager(Integer mangid, Integer empid) {
 		
 		this.mangid = mangid;
 		this.empid = empid;
-		this.taskid = taskid;
 	}
 
 
@@ -47,22 +45,13 @@ public class Manager {
 	}
 
 
-	public Integer getTaskid() {
-		return taskid;
-	}
-
-
-	public void setTaskid(Integer taskid) {
-		this.taskid = taskid;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Manager [mangid=" + mangid + ", empid=" + empid + ", taskid=" + taskid + "]";
+		return "Manager [mangid=" + mangid + ", empid=" + empid + "]";
 	}
-	
-	
+
+
+
 	
 	
 
