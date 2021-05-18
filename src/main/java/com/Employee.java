@@ -127,6 +127,7 @@ public class Employee {
 				+ ", empemail=" + empemail + ", emppassword=" + emppassword + ", empcontact=" + empcontact
 				+ ", emptype=" + emptype + ", teamid=" + teamid + ", mangid=" + mangid + "]";
 	}
+
 	
 	
 
