@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 @Entity(name = "employee")
 public class Employee {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Integer empid;
