@@ -11,10 +11,10 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Integer empid;
-	@Column(unique = true)
 	String empname;
 	String empaddress;
 	Integer empage;
+	@Column(unique = true)
 	String empemail;
 	String emppassword;
 	String empcontact;
