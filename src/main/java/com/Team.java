@@ -12,17 +12,17 @@ public class Team {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Integer teamid;
 	String teamname;
-	Integer empid;
+	Integer taskid;
 
 	public Team() {
 
 	}
 
-	public Team(Integer teamid, String teamname, Integer empid) {
+	public Team(Integer teamid, String teamname, Integer taskid) {
 		super();
 		this.teamid = teamid;
 		this.teamname = teamname;
-		this.empid = empid;
+		this.taskid = taskid;
 	}
 
 	public Integer getTeamid() {
@@ -41,19 +41,20 @@ public class Team {
 		this.teamname = teamname;
 	}
 
-	public Integer getEmpid() {
-		return empid;
+	public Integer getTaskid() {
+		return taskid;
 	}
 
-	public void setEmpid(Integer empid) {
-		this.empid = empid;
+	public void setTaskid(Integer taskid) {
+		this.taskid = taskid;
 	}
 
 	@Override
 	public String toString() {
-		return "Team [teamid=" + teamid + ", teamname=" + teamname + ", empid=" + empid + "]";
+		return "Team [teamid=" + teamid + ", teamname=" + teamname + ", taskid=" + taskid + "]";
 	}
 
+	
 	
 	
 	
