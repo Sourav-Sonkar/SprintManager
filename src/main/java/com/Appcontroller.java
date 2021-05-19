@@ -96,6 +96,20 @@ public class Appcontroller {
 		}
 	}
 
+	@PostMapping("/isManager")
+	public boolean isManager(@RequestBody Manager manager) {
+		System.out.println(manager.toString());
+		try {
+			Manager temp = (Manager) managerRepository.findByempid(manager.getEmpid());
+			if (temp != null)
+				return true;
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	@GetMapping("/manager/view")
 	public List<Manager> getManager() {
 		List<Manager> manager = (List<Manager>) managerRepository.findAll();
