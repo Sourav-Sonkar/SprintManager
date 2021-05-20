@@ -84,6 +84,20 @@ public class Appcontroller {
 		}
 	}
 
+	@PutMapping("/employee/updateTeam")
+	public boolean updateEmployeeTeam(@RequestBody Employee e) {
+		try {
+			Employee temp = employeeRepository.findById(e.getEmpid()).get();
+			temp.setTeamid(e.getTeamid());
+			employeeRepository.save(temp);
+			return true;
+		} catch (Exception ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
 	@PutMapping("/employee/edit")
 	public Employee editEmployee(@RequestBody Employee employee) {
 		try {
@@ -98,7 +112,6 @@ public class Appcontroller {
 
 	@PostMapping("/isManager")
 	public boolean isManager(@RequestBody Manager manager) {
-		System.out.println(manager.toString());
 		try {
 			Manager temp = (Manager) managerRepository.findByempid(manager.getEmpid());
 			if (temp != null)
@@ -229,6 +242,18 @@ public class Appcontroller {
 		try {
 			team = teamRepository.save(team);
 			return team;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@PostMapping("/team/getName")
+	public Team getName(@RequestBody Team team) {
+		try {
+			Team temp = teamRepository.findByteamid(team.getTeamid());
+			return temp;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
