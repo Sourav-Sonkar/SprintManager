@@ -1,5 +1,6 @@
 package com;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,27 +167,55 @@ public class Appcontroller {
 	}
 
 	@GetMapping("/task/view")
-	public List<Task> getTask() {
-		List<Task> task = (List<Task>) taskRepository.findAll();
-		return task;
+	public List<TaskwithTeam> getTask() {
+		List<TaskwithTeam> s = new ArrayList<TaskwithTeam>();
+		Object[][] task = taskRepository.taskWithTeam();
+		for (int row = 0; row < task.length; row++) {
+			TaskwithTeam temp = new TaskwithTeam();
+			for (int col = 0; col < task[row].length; col++) {
+				if (task[row][col] == null)
+					task[row][col] = 0;
+				if (col == 0)
+					temp.setTaskid((int) task[row][col]);
+				if (col == 1)
+					temp.setTasktitle((String) task[row][col]);
+				if (col == 2)
+					temp.setTaskdesc((String) task[row][col]);
+				if (col == 3)
+					temp.setTaskstatus((String) task[row][col]);
+				if (col == 4)
+					temp.setTaskdate((String) task[row][col]);
+				if (col == 5)
+					temp.setTeamid((int) task[row][col]);
+			}
+			s.add(temp);
+		}
+		return s;
 	}
 
 	@PostMapping("/task/add")
-	public Task saveTask(@RequestBody Task task) {
+	public boolean saveTask(@RequestBody Task task) {
 		try {
 			Task temp = taskRepository.save(task);
-			return temp;
+			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 	}
 
-	@DeleteMapping("/task/delete/{taskId}")
-	public Boolean deleteTask(@PathVariable Integer taskId) {
+	@PostMapping("/task/delete")
+	public Boolean deleteTask(@RequestBody TaskwithTeam task) {
 		try {
-			taskRepository.deleteById(taskId);
+			if (task.getTeamid() != 0) {
+				Team temp = teamRepository.findByteamid(task.getTeamid());
+				if (temp != null) {
+					temp.setTaskid(null);
+					teamRepository.save(temp);
+				}
+			}
+			taskRepository.deleteById(task.getTaskid());
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -204,6 +233,36 @@ public class Appcontroller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@PostMapping("/task/singleTask")
+	public Task singleTask(@RequestBody Team team) {
+		try {
+			Team temp = teamRepository.findByteamid(team.getTeamid());
+			if (temp != null) {
+				Task temp1 = taskRepository.findBytaskid(temp.getTaskid());
+				return temp1;
+			}
+			return null;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@PutMapping("/task/updateStatus")
+	public boolean updateTaskStatus(@RequestBody Task e) {
+		try {
+			Task temp = taskRepository.findById(e.taskid).get();
+			temp.setTaskstatus(e.taskstatus);
+			taskRepository.save(temp);
+			return true;
+		} catch (Exception ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			return false;
 		}
 	}
 
@@ -261,4 +320,17 @@ public class Appcontroller {
 		}
 	}
 
+	@PutMapping("/team/assignTask")
+	public boolean assignTask(@RequestBody Team e) {
+		try {
+			Team temp = teamRepository.findById(e.teamid).get();
+			temp.setTaskid(e.taskid);
+			teamRepository.save(temp);
+			return true;
+		} catch (Exception ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			return false;
+		}
+	}
 }
